@@ -1,3 +1,13 @@
 .card {
-    @apply bg-slate-600;
+    @apply cursor-pointer;
+
+    img {
+        @apply mb-2;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: scale(1.02);
+            transform-origin: bottom;
+        }
+    }
 }

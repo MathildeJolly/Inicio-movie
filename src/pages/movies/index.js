@@ -4,19 +4,18 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import MovieCard from '@/components/MovieCard';
+import { getOptionsApi } from '@/utils/api-config';
 
 export default function Movies(movies) {
-    console.log(movies.results);
     return (
         <Layout>
             <Head>
                 <title>Movie Catalogue</title>
             </Head>
-
             <div>
                 <h1>Catalogue</h1>
                 <div className="grid gap-4 grid-cols-3">
-                    {movies?.results.map((element) => (
+                    {movies?.results?.map((element) => (
                         <MovieCard key={element.id} element={element} />
                     ))}
                 </div>
@@ -25,18 +24,10 @@ export default function Movies(movies) {
     );
 }
 
-export const getServerSideProps = async () => {
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${process.env.API_TOKEN}`,
-        },
-    };
-
+export const getStaticProps = async () => {
     const res = await fetch(
         'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
-        options
+        getOptionsApi('GET')
     );
     const movies = await res.json();
 
