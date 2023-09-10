@@ -1,5 +1,6 @@
 .pagination {
-    @apply w-full bg-black fixed bottom-0 left-0 flex justify-center py-4 font-bold;
+    @apply w-full bg-black border-t-8 fixed bottom-0 left-0 flex justify-center py-4 font-bold;
+    border-color: #003c39;
 
     > div {
         @apply flex gap-8 items-center;
