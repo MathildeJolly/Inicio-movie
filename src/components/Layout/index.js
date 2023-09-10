@@ -7,7 +7,7 @@ const siteTitle = 'InicioMovie';
 
 export default function Layout({ children, home }) {
     return (
-        <div className="container">
+        <div>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
                 <meta
@@ -24,24 +24,15 @@ export default function Layout({ children, home }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
             <header className={styles.header}>
-                {home ? (
-                    <>
-                        <h1>Welcome !</h1>
-                    </>
-                ) : (
+                {!home && (
                     <>
                         <h2>
-                            <Link href="/movies">Show catalog</Link>
+                            <Link href="/">← Back to home</Link>
                         </h2>
                     </>
                 )}
             </header>
-            {!home && (
-                <div className={styles.backToHome}>
-                    <Link href="/">← Back to home</Link>
-                </div>
-            )}
-            <main>{children}</main>
+            <main className={!home ? 'container' : ''}>{children}</main>
         </div>
     );
 }
