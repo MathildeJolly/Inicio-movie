@@ -2,6 +2,12 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+    --gradient-color: linear-gradient(
+        90deg,
+        #003c39 0%,
+        #385e4a 40%,
+        #ffd584 85%
+    );
 }
 
 body {
@@ -18,6 +24,14 @@ body {
     @apply w-4/5;
     padding: 0 1rem;
     margin: 3rem auto 6rem;
+}
+
+h1 {
+    @apply text-3xl mb-4 font-bold;
+    background: var(--gradient-color);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 h2 {

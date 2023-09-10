@@ -1,5 +1,15 @@
 .pagination {
-    @apply flex justify-center gap-4;
+    @apply w-full bg-black fixed bottom-0 left-0 flex justify-center py-4 font-bold;
+
+    > div {
+        @apply flex gap-8 items-center;
+        width: 350px;
+
+        button {
+            @apply rounded-lg border border-transparent p-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30;
+            width: 150px;
+        }
+    }
 }
 
 .movieDetail {

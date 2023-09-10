@@ -12,10 +12,11 @@ export default function Home() {
                 <title>Help me Find a movie !</title>
             </Head>
             <main
-                className={`flex min-h-screen items-center justify-center p-24 ${inter.className}`}
+                className={`flex flex-col min-h-screen items-center justify-center p-24 ${inter.className}`}
             >
+                <h1>Help Me Find a Movie!</h1>
                 <Link href="/movies">
-                    <div className="group h-16 rounded-lg border border-transparent px-5 pt-3 pb-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30">
+                    <div className="group h-16 rounded-lg border border-transparent p-4 transition-colors hover:border-neutral-700 hover:bg-neutral-800/30">
                         <h2>
                             Display catalog{' '}
                             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">

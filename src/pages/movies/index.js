@@ -30,30 +30,29 @@ export default function Movies({ movies }) {
 
     return (
         <Layout>
-            <Head>
-                <title>Movie Catalog</title>
-            </Head>
             <div>
-                <h2 className="text-center mb-8">Trending Movies Catalog</h2>
+                <h1 className="text-center mb-8">Trending Movies Catalog</h1>
                 <div className="grid gap-4 grid-cols-2 md:grid-cols-5">
                     {updatedMovies?.map((element, index) => (
                         <MovieCard key={index} element={element} />
                     ))}
                 </div>
                 <div className="pagination" onClick={scrollToTop}>
-                    {currentPage > 1 && (
+                    <div>
                         <button
                             onClick={() => handlePageChange(currentPage - 1)}
                             disabled={currentPage === 1}
                         >
                             Previous
                         </button>
-                    )}
 
-                    <span>{currentPage}</span>
-                    <button onClick={() => handlePageChange(currentPage + 1)}>
-                        Next
-                    </button>
+                        <span>{currentPage}</span>
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
             </div>
         </Layout>

@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { fetchAllMovies, getMovieById } from '@/utils/api-movie';
 import { useRouter } from 'next/router';
+import Layout from '@/components/Layout';
+import Head from 'next/head';
 
 export default function Movie({ movie }) {
     const router = useRouter();
@@ -13,28 +15,30 @@ export default function Movie({ movie }) {
     }
 
     return (
-        <div className="container">
-            <h2 className="text-center mb-4">{movie.title}</h2>
-            <div className="movieDetail">
-                <Image
-                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                    alt={movie.title}
-                    width={300}
-                    height={300}
-                />
-                <div>
-                    <p>{movie.overview}</p>
-                    <p>
-                        <b>Released Date : </b>
-                        {movie.release_date}
-                    </p>
-                    <p>
-                        <b>Vote average : </b>
-                        {movie.vote_average}/10
-                    </p>
+        <Layout pageTitle={movie.title}>
+            <div>
+                <h1 className="text-center mb-4">{movie.title}</h1>
+                <div className="movieDetail">
+                    <Image
+                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                        alt={movie.title}
+                        width={300}
+                        height={300}
+                    />
+                    <div>
+                        <p>{movie.overview}</p>
+                        <p>
+                            <b>Released Date : </b>
+                            {movie.release_date}
+                        </p>
+                        <p>
+                            <b>Vote average : </b>
+                            {movie.vote_average}/10
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     );
 }
 

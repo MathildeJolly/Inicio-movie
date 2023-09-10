@@ -5,9 +5,13 @@ import Link from 'next/link';
 
 const siteTitle = 'InicioMovie';
 
-export default function Layout({ children, home }) {
+export default function Layout({
+    children,
+    home,
+    pageTitle = 'Help Me Find a Movie',
+}) {
     return (
-        <div>
+        <>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
                 <meta
@@ -22,17 +26,18 @@ export default function Layout({ children, home }) {
                 />
                 <meta name="og:title" content={siteTitle} />
                 <meta name="twitter:card" content="summary_large_image" />
+                <title>{pageTitle}</title>
             </Head>
             <header className={styles.header}>
                 {!home && (
                     <>
                         <h2>
-                            <Link href="/">← Back to home</Link>
+                            <Link href="/movies">Catalog</Link>
                         </h2>
                     </>
                 )}
             </header>
             <main className={!home ? 'container' : ''}>{children}</main>
-        </div>
+        </>
     );
 }
