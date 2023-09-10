@@ -30,11 +30,14 @@ export default function Layout({
             </Head>
             <header className={styles.header}>
                 {!home && (
-                    <>
+                    <div className="flex gap-8 justify-center">
                         <h2>
                             <Link href="/movies">Catalog</Link>
                         </h2>
-                    </>
+                        <h2>
+                            <Link href="/wishlist">Wishlist</Link>
+                        </h2>
+                    </div>
                 )}
             </header>
             <main className={!home ? 'container' : ''}>{children}</main>

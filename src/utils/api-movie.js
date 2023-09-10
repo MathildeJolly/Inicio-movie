@@ -16,7 +16,7 @@ async function fetchMovies(page, timeframe) {
 
 export async function getMovieById(id) {
     const data = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+        `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${apiKey}`,
         getApiOptionsFetch('GET')
     );
 

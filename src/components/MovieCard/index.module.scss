@@ -1,15 +1,28 @@
-.card {
-    @apply cursor-pointer mb-4;
+.cardWrapper {
+    @apply flex flex-col justify-between mb-8;
 
-    div {
-        img {
-            @apply mb-2 rounded-md;
-            transition: all 0.2s ease;
+    .card {
+        @apply cursor-pointer mb-4;
 
-            &:hover {
-                transform: scale(1.02);
-                transform-origin: bottom;
+        div {
+            img {
+                @apply mb-2 rounded-md;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    transform: scale(1.02);
+                    transform-origin: bottom;
+                }
             }
+        }
+    }
+
+    > button {
+        @apply text-xs text-right;
+
+        &:hover {
+            color: #003c39;
+            transition: all 0.2s ease;
         }
     }
 }

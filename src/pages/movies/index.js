@@ -4,10 +4,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchAllMovies } from '@/utils/api-movie';
 import { useRouter } from 'next/router';
 import Toggle from '@/components/Toggle';
+import { useAppContext } from '@/context/AppContext';
 
 export default function Movies({ movies }) {
     const [updatedMovies, setUpdatedMovies] = useState(movies);
     const router = useRouter();
+    const { wishlist, addToWishlist, removeFromWishlist } = useAppContext();
     const [currentPage, setCurrentPage] = useState(router.query.page || 1);
     const [timeframe, setTimeframe] = useState(router.query.timeframe || 'day');
 
@@ -66,7 +68,13 @@ export default function Movies({ movies }) {
                 />
                 <div className="grid gap-4 grid-cols-2 md:grid-cols-5">
                     {updatedMovies?.map((element, index) => (
-                        <MovieCard key={index} element={element} />
+                        <MovieCard
+                            key={index}
+                            element={element}
+                            addToWishlist={addToWishlist}
+                            removeFromWishlist={removeFromWishlist}
+                            isInWishlist={wishlist.includes(element.id)}
+                        />
                     ))}
                 </div>
                 <div className="pagination" onClick={scrollToTop}>
