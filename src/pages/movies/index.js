@@ -4,14 +4,14 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import MovieCard from '@/components/MovieCard';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { fetchAllMovies } from '@/utils/api-movie';
 import { useRouter } from 'next/router';
 
 export default function Movies({ movies }) {
     const [updatedMovies, setUpdatedMovies] = useState(movies);
-    const [currentPage, setCurrentPage] = useState(1);
-    const { query } = useRouter();
+    const router = useRouter();
+    const [currentPage, setCurrentPage] = useState(router.query.page || 1);
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -21,12 +21,28 @@ export default function Movies({ movies }) {
         });
     };
 
-    async function handlePageChange(newPage) {
-        setCurrentPage(newPage);
+    useEffect(() => {
+        if (!router.query.page) {
+            return;
+        }
 
-        const newMovies = await fetchAllMovies(newPage);
-        setUpdatedMovies(newMovies);
+        handlePageChange(router.query.page);
+    }, [router.query.page]);
+
+    async function handlePageChange(newPage) {
+        router.query.page = newPage;
+        router.push(router);
+
+        setCurrentPage(newPage);
+        updateMovies(newPage);
     }
+
+    const updateMovies = useCallback(async (page) => {
+        const newMovies = await fetchAllMovies(page);
+        setUpdatedMovies(newMovies);
+
+        return newMovies;
+    });
 
     return (
         <Layout>
