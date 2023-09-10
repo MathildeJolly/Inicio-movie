@@ -29,7 +29,7 @@ export default function Movies({ movies }) {
         router.query.page = newPage;
         router.push(router);
 
-        setCurrentPage(newPage);
+        setCurrentPage(parseInt(newPage));
         updateMovies(newPage);
     }
 
