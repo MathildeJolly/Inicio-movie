@@ -1,7 +1,17 @@
 import Image from 'next/image';
 import { fetchAllMovies, getMovieById } from '@/utils/api-movie';
+import { useRouter } from 'next/router';
 
 export default function Movie({ movie }) {
+    const router = useRouter();
+
+    // If the page is not yet generated, this will be displayed
+    // initially until getStaticProps() finishes running
+    // https://nextjs.org/docs/pages/api-reference/functions/get-static-paths
+    if (router.isFallback) {
+        return <div className="container">Loading...</div>;
+    }
+
     return (
         <div className="container">
             <h2 className="text-center mb-4">{movie.title}</h2>
