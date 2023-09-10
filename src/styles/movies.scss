@@ -1,3 +1,14 @@
 .pagination {
     @apply flex justify-center gap-4;
 }
+
+.movieDetail {
+    @apply flex gap-4;
+
+    img {
+        @apply rounded-md;
+    }
+    p {
+        @apply text-justify;
+    }
+}

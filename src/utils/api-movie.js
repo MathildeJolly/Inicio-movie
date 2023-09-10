@@ -14,6 +14,15 @@ async function fetchMovies(page) {
     return movies.results;
 }
 
+export async function getMovieById(id) {
+    const data = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+        getApiOptionsFetch('GET')
+    );
+
+    return await data.json();
+}
+
 export async function fetchAllMovies(currentPage = 1) {
     if (currentPage < 1) {
         currentPage = 1;
