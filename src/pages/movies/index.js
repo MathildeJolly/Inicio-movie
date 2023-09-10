@@ -4,20 +4,56 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import MovieCard from '@/components/MovieCard';
-import { getOptionsApi } from '@/utils/api-config';
+import { useEffect, useState } from 'react';
+import { fetchAllMovies } from '@/utils/api-movie';
+import { useRouter } from 'next/router';
 
-export default function Movies(movies) {
+export default function Movies({ movies }) {
+    const [updatedMovies, setUpdatedMovies] = useState(movies);
+    const [currentPage, setCurrentPage] = useState(1);
+    const { query } = useRouter();
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+    };
+
+    async function handlePageChange(newPage) {
+        setCurrentPage(newPage);
+
+        const newMovies = await fetchAllMovies(newPage);
+        setUpdatedMovies(newMovies);
+    }
+
     return (
         <Layout>
             <Head>
-                <title>Movie Catalogue</title>
+                <title>Movie Catalog</title>
             </Head>
             <div>
-                <h1>Catalogue</h1>
-                <div className="grid gap-4 grid-cols-3">
-                    {movies?.results?.map((element) => (
-                        <MovieCard key={element.id} element={element} />
+                <h2 className="text-center mb-8">Trending Movies Catalog</h2>
+                <div className="grid gap-4 grid-cols-2 md:grid-cols-5">
+                    {updatedMovies?.map((element, index) => (
+                        <MovieCard key={index} element={element} />
                     ))}
+                </div>
+                <div className="pagination" onClick={scrollToTop}>
+                    {currentPage > 1 && (
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                        >
+                            Previous
+                        </button>
+                    )}
+
+                    <span>{currentPage}</span>
+                    <button onClick={() => handlePageChange(currentPage + 1)}>
+                        Next
+                    </button>
                 </div>
             </div>
         </Layout>
@@ -25,11 +61,7 @@ export default function Movies(movies) {
 }
 
 export const getStaticProps = async () => {
-    const res = await fetch(
-        'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
-        getOptionsApi('GET')
-    );
-    const movies = await res.json();
+    const allMovies = await fetchAllMovies();
 
-    return { props: movies };
+    return { props: { movies: allMovies } };
 };

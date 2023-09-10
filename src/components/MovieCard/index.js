@@ -9,6 +9,7 @@ export default function MovieCard({ element }) {
                 <div>
                     <Image
                         src={`https://image.tmdb.org/t/p/original/${element.poster_path}`}
+                        alt={element.title}
                         width={300}
                         height={300}
                     />

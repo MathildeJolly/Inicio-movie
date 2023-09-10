@@ -1,6 +1,6 @@
 export const baseUrl = 'https://image.tmdb.org/t/p/original/';
 
-export function getOptionsApi(method) {
+export function getApiOptionsFetch(method) {
     return {
         method: method,
         headers: {

@@ -1,13 +1,15 @@
 .card {
-    @apply cursor-pointer;
+    @apply cursor-pointer mb-4;
 
-    img {
-        @apply mb-2;
-        transition: all 0.2s ease;
+    div {
+        img {
+            @apply mb-2 rounded-md;
+            transition: all 0.2s ease;
 
-        &:hover {
-            transform: scale(1.02);
-            transform-origin: bottom;
+            &:hover {
+                transform: scale(1.02);
+                transform-origin: bottom;
+            }
         }
     }
 }
